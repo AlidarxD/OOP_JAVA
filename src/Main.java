@@ -1,83 +1,38 @@
-import java.io.Serializable;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-abstract class Shape implements Serializable {
-    public abstract double calculateArea();
-    public abstract String getDescription();
-}
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-class Circle extends Shape {
-    private final double radius;
+public class Main {
+    public static void main(String[] args) {
+        String filePath = "C:\\Users\\toleu\\Downloads\\students.xlsx";
+        List<Student> students = new ArrayList<>();
 
-    public Circle(double radius) {
-        this.radius = radius;
-    }
+        try (FileInputStream fis = new FileInputStream(filePath);
+             Workbook workbook = new XSSFWorkbook(fis)) {
 
-    @Override
-    public double calculateArea() {
-        return Math.PI * radius * radius;
-    }
+            Sheet sheet = workbook.getSheetAt(0);
 
-    @Override
-    public String getDescription() {
-        return "Circle radius " + radius;
-    }
-}
+            for (int i = 1; i <= sheet.getLastRowNum(); i++) {
+                Row row = sheet.getRow(i);
+                if (row != null) {
+                    String name = row.getCell(0).getStringCellValue();
+                    double currentScholarship = row.getCell(1).getNumericCellValue();
+                    double newScholarship = row.getCell(2).getNumericCellValue();
 
-class Rectangle extends Shape {
-    private final double length;
-    private final double width;
+                    students.add(new Student(name, currentScholarship, newScholarship));
+                }
+            }
 
-    public Rectangle(double length, double width) {
-        this.length = length;
-        this.width = width;
-    }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-    @Override
-    public double calculateArea() {
-        return length * width;
-    }
-
-    @Override
-    public String getDescription() {
-        return "Rectangle length " + length + " width " + width;
-    }
-}
-
-class Sphere extends Shape {
-    private final double radius;
-
-    public Sphere(double radius) {
-        this.radius = radius;
-    }
-
-    @Override
-    public double calculateArea() {
-        return 4 * Math.PI * radius * radius;
-    }
-
-    @Override
-    public String getDescription() {
-        return "Sphere  radius " + radius;
-    }
-}
-
-class Cuboid extends Shape {
-    private final double length;
-    private final double width;
-    private final double height;
-
-    public Cuboid(double length, double width, double height) {
-        this.length = length;
-        this.width = width;
-        this.height = height;
-    }
-
-    @Override
-    public double calculateArea() {
-        return 2 * (length * width + width * height + height * length); }
-
-    @Override
-    public String getDescription() {
-        return "Cuboid  length " + length + ", width " + width + ",  height " + height;
+        for (Student student : students) {
+            student.showScholarship();
+        }
     }
 }
