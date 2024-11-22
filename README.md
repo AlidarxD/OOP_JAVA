@@ -21,4 +21,4 @@ This project contains a Java program that reads student data from an Excel file 
 
 ## Dependencies
 
-This project uses Apache POI to read data from an Excel file. You can include the necessary dependencies in your `pom.xml` if you are using Maven.
+This project uses Apache POI to read data from an Excel file.
