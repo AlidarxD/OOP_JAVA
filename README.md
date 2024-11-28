@@ -1,24 +1,55 @@
-# All files committed as PracticeWeek12 they are PracticeWeek12 xD ,and others they are SIS2 , hope to get 100 of 100 ;)
+# README для JDBCDatabaseExample
 
-# Scholarship Student Program
 
 This project contains a Java program that reads student data from an Excel file (`students.xlsx`), calculates the scholarship increase for each student, and displays the results in a clear format.
 
-## Features
+## Пояснение к коду
+Создание базы данных: Если база данных testdb еще не существует, вам нужно создать её вручную перед запуском программы
+CREATE DATABASE testdb;
 
-- Reads student data from an Excel file (`students.xlsx`).
-- Calculates the increase in scholarship for each student.
-- Displays the scholarship information in a column format for readability.
+Подключение к базе данных: В коде используется строка подключения JDBC_URL, которая указывает на локальную базу данных testdb с пользователем root и паролем 30112005aLIDAR!.
+static final String JDBC_URL = "jdbc:mysql://localhost:3306/testdb";
+static final String USER = "root";
+static final String PASSWORD = "30112005aLIDAR!";
 
-## Project Structure
+Подключение и создание объектов: В методе main создается подключение к базе данных с использованием DriverManager.getConnection() и объект Statement, который используется для выполнения SQL-запросов.
+
+try (Connection connection = DriverManager.getConnection(JDBC_URL, USER, PASSWORD);
+     Statement statement = connection.createStatement()) {
+    Class.forName("com.mysql.cj.jdbc.Driver");
+
+Методы:
+
+createTable(Statement statement) — создает таблицу Employees, если она не существует. В таблице есть четыре поля: id, first, last, age.
+insertRecords(Statement statement) — вставляет несколько записей в таблицу Employees.
+selectAndDisplayRecords(Statement statement) — выбирает и отображает все записи из таблицы Employees.
+updateRecords(Statement statement) — обновляет запись в таблице, изменяя значение поля first для записи, у которой фамилия norm.
+deleteRecords(Statement statement) — удаляет запись с фамилией Sheep. Алан ғой
+Пример кода для создания таблицы:
+
+private static void createTable(Statement statement) throws SQLException {
+    String createTableSQL = "CREATE TABLE IF NOT EXISTS Employees (" +
+                            "id INT AUTO_INCREMENT PRIMARY KEY, " +
+                            "first VARCHAR(50), " +
+                            "last VARCHAR(50), " +
+                            "age INT)";
+    statement.executeUpdate(createTableSQL);
+}
+
+Обработка исключений: Программа обрабатывает два типа исключений:
+
+SQLException — ошибки, связанные с SQL-запросами и взаимодействием с базой данных.
+ClassNotFoundException — если класс драйвера MySQL не найден.
 
 
-### File Descriptions
+Закрытие ресурсов: Используется конструкция try-with-resources, чтобы автоматически закрыть соединение и другие ресурсы после выполнения.
+try (Connection connection = DriverManager.getConnection(JDBC_URL, USER, PASSWORD);
+     Statement statement = connection.createStatement()) {
+}
 
-- **Main.java**: The entry point of the program. Reads the data from the Excel file, processes it, and displays the scholarship information for each student.
-- **Student.java**: Defines the `Student` class, including fields for student name, current scholarship, new scholarship, and methods for calculating and displaying the scholarship increase.
-- **students.xlsx**: Excel file containing student data with the columns: `Name`, `Current Scholarship`, and `New Scholarship`.
+![Screenshot 2024-11-28 165411](https://github.com/user-attachments/assets/e25eaefd-1d39-4096-8593-2c79a4714750)
 
-## Dependencies
+![Screenshot 2024-11-28 165419](https://github.com/user-attachments/assets/a5235a0c-ffb0-4450-b9fd-b79639610631)
 
-This project uses Apache POI to read data from an Excel file.
+![Screenshot 2024-11-28 165524](https://github.com/user-attachments/assets/b8f21716-2e53-4342-8769-5fdebc91495c)
+
