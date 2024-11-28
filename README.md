@@ -1,8 +1,6 @@
 # README для JDBCDatabaseExample
 
 
-This project contains a Java program that reads student data from an Excel file (`students.xlsx`), calculates the scholarship increase for each student, and displays the results in a clear format.
-
 ## Пояснение к коду
 Создание базы данных: Если база данных testdb еще не существует, вам нужно создать её вручную перед запуском программы
 CREATE DATABASE testdb;
