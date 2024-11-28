@@ -39,7 +39,7 @@ public class JDBCDatabaseExample {
 
     private static void insertRecords(Statement statement) throws SQLException {
         String insertSQL = "INSERT INTO Employees (first, last, age) VALUES " +
-                "('Alan', 'Ship', 18), " +
+                "('Alan', 'Sheep', 18), " +
                 "('Alidar', 'Cool', 19), " +
                 "('Magzhan', 'AlsoCool', 18), " +
                 "('NoName', 'norm', 18)";
@@ -64,7 +64,7 @@ public class JDBCDatabaseExample {
     }
 
     private static void deleteRecords(Statement statement) throws SQLException {
-        String deleteSQL = "DELETE FROM Employees WHERE last = 'Ship'";
+        String deleteSQL = "DELETE FROM Employees WHERE last = 'Sheep'";
         statement.executeUpdate(deleteSQL);
     }
 }
