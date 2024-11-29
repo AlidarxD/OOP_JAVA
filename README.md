@@ -45,6 +45,7 @@ try (Connection connection = DriverManager.getConnection(JDBC_URL, USER, PASSWOR
      Statement statement = connection.createStatement()) {
 }
 
+![Screenshot 2024-11-29 141825](https://github.com/user-attachments/assets/529d55ae-0d05-4a8f-8122-f3bc81db2bd0)
 
 
 ![Screenshot 2024-11-28 165419](https://github.com/user-attachments/assets/a5235a0c-ffb0-4450-b9fd-b79639610631)
