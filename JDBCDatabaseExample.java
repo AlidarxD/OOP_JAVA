@@ -1,7 +1,7 @@
 import java.sql.*;
 
 public class JDBCDatabaseExample {
-    // Database credentials
+ 
     static final String JDBC_URL = "jdbc:mysql://localhost:3306/testdb";
     static final String USER = "root";
     static final String PASSWORD = "30112005aLIDAR!";
